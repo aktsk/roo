@@ -138,12 +138,12 @@ class Roo::Excelx < Roo::Base
     row,col = normalize(row,col)
     if celltype(row,col,sheet) == :date
       yyyy,mm,dd = @cell[sheet][[row,col]].split('-')
-      return Date.new(yyyy.to_i,mm.to_i,dd.to_i)
+      return Time.new(yyyy.to_i,mm.to_i,dd.to_i).to_date
     elsif celltype(row,col,sheet) == :datetime
       date_part,time_part = @cell[sheet][[row,col]].split(' ')
       yyyy,mm,dd = date_part.split('-')
       hh,mi,ss = time_part.split(':')
-      return DateTime.civil(yyyy.to_i,mm.to_i,dd.to_i,hh.to_i,mi.to_i,ss.to_i)
+      return Time.new(yyyy.to_i,mm.to_i,dd.to_i,hh.to_i,mi.to_i,ss.to_i).to_datetime
     end
     @cell[sheet][[row,col]]
   end
