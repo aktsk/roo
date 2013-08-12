@@ -138,7 +138,7 @@ class Roo::Excelx < Roo::Base
     row,col = normalize(row,col)
     if celltype(row,col,sheet) == :date
       yyyy,mm,dd = @cell[sheet][[row,col]].split('-')
-      return Time.new(yyyy.to_i,mm.to_i,dd.to_i).to_date
+      return Time.new(yyyy.to_i,mm.to_i,dd.to_i).to_datetime
     elsif celltype(row,col,sheet) == :datetime
       date_part,time_part = @cell[sheet][[row,col]].split(' ')
       yyyy,mm,dd = date_part.split('-')
