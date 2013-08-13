@@ -208,7 +208,7 @@ class Roo::Excel < Roo::Base
       when :date
         v
       when :datetime
-        @cell[sheet][key] = DateTime.new(v.year,v.month,v.day,v.hour,v.min,v.sec)
+        @cell[sheet][key] = Time.new(v.year,v.month,v.day,v.hour,v.min,v.sec).to_datetime
       when :percentage
         v.to_f
       when :time
