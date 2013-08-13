@@ -58,10 +58,6 @@ class Roo::Excel < Roo::Base
     read_cells(sheet)
     raise "should be read" unless @cells_read[sheet]
     row,col = normalize(row,col)
-    if celltype(row,col,sheet) == :date
-      yyyy,mm,dd = @cell[sheet][[row,col]].split('-')
-      return Date.new(yyyy.to_i,mm.to_i,dd.to_i)
-    end
     if celltype(row,col,sheet) == :string
       return platform_specific_encoding(@cell[sheet][[row,col]])
     else
@@ -206,7 +202,7 @@ class Roo::Excel < Roo::Base
       when :string
         v
       when :date
-        v
+        Time.parse(v).to_datetime
       when :datetime
         @cell[sheet][key] = Time.new(v.year,v.month,v.day,v.hour,v.min,v.sec).to_datetime
       when :percentage
